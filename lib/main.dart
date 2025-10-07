@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/screens/home_screen.dart';
 
 void main() {
-  runApp(const TodoApp());
+  runApp(const MainApp());
 }
 
-class TodoApp extends StatelessWidget {
-  const TodoApp({super.key});
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ToDo App',
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blue),
-      home: HomeScreen(),
+    return const MaterialApp(
+      home: Scaffold(body: Center(child: Text('Hello World!'))),
     );
   }
 }
