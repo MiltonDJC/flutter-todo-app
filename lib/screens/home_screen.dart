@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
             isCompleted: task.isCompleted,
             onChanged: (newBool) {
               setState(() {
-                task.toogleComplete();
+                task.toggleComplete();
               });
             },
           );
