@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('ToDo App')),
+      appBar: AppBar(title: const Text('ToDo App')),
       body: ListView.builder(
         itemCount: _tasks.length,
         itemBuilder: (context, index) {
@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('Cancelar'),
+                    child: const Text('Cancelar'),
                   ),
                   TextButton(
                     onPressed: () {
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
