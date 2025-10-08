@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      if (newTaskTitle.isNotEmpty) {
+                      if (newTaskTitle.trim().isNotEmpty) {
                         setState(() {
                           _tasks.add(Task(newTaskTitle));
                         });
