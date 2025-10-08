@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/models/task.dart';
-import 'package:flutter_todo_app/utils/dummy_data.dart';
+import 'package:flutter_todo_app/managers/task_manager.dart';
 import 'package:flutter_todo_app/widgets/task_tile.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,22 +11,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Task> _tasks = List.from(dummyTasks);
+  final taskManager = TaskManager();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('ToDo App')),
       body: ListView.builder(
-        itemCount: _tasks.length,
+        itemCount: taskManager.tasks.length,
         itemBuilder: (context, index) {
-          final task = _tasks[index];
+          final task = taskManager.tasks[index];
           return TaskTile(
             title: task.title,
             isCompleted: task.isCompleted,
             onChanged: (newBool) {
               setState(() {
-                task.toggleComplete();
+                taskManager.toggleTask(task);
               });
             },
           );
@@ -57,8 +57,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       if (newTaskTitle.trim().isNotEmpty) {
                         setState(() {
-                          _tasks.add(Task(newTaskTitle));
+                          taskManager.addTask(newTaskTitle);
                         });
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: 'Write a valid task title.',
+                        );
                       }
                       Navigator.pop(context);
                     },
