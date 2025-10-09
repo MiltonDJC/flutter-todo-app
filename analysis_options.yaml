@@ -4,7 +4,7 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
-    # === BUENAS PRÁCTICAS ===
+    # === GOOD PRACTICES ===
     prefer_const_constructors: true
     prefer_final_fields: true
     avoid_print: true
@@ -12,7 +12,7 @@ linter:
     avoid_unused_constructor_parameters: true
     prefer_const_literals_to_create_immutables: true
 
-    # === LIMPIEZA Y ESTILO ===
+    # === CLEAN AND STYLE ===
     always_specify_types: false
     sort_constructors_first: true
     sort_child_properties_last: true
