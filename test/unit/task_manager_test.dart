@@ -28,7 +28,7 @@ void main() {
       },
     );
     test(
-      "Given the task manager list, when an empty task is try to be added, then the task should not be available to be added.",
+      'Given the task manager list, when an empty task is try to be added, then the task should not be available to be added.',
       () {
         final tasksLength = taskManager.tasks.length;
         taskManager.addTask('');
@@ -36,7 +36,7 @@ void main() {
       },
     );
     test(
-      "Given the task manager list, when a task with spaces is try to be added, then the task should not be available to be added.",
+      'Given the task manager list, when a task with spaces is try to be added, then the task should not be available to be added.',
       () {
         final tasksLength = taskManager.tasks.length;
         taskManager.addTask('   ');

@@ -1,9 +1,9 @@
 import 'package:flutter_todo_app/models/task.dart';
 
 class TaskManager {
-  final List<Task> _tasks = [];
-
   TaskManager();
+
+  final List<Task> _tasks = [];
 
   List<Task> get tasks => List.unmodifiable(_tasks);
 

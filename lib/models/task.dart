@@ -1,8 +1,8 @@
 class Task {
+  Task(this.title, {this.isCompleted = false});
+
   final String title;
   bool isCompleted;
-
-  Task(this.title, {this.isCompleted = false});
 
   void toggleComplete() {
     isCompleted = !isCompleted;
