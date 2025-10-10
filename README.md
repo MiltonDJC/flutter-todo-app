@@ -121,9 +121,6 @@ open coverage/html/index.html  # macOS
 xdg-open coverage/html/index.html  # Linux
 ```
 
-
-
-
 ----
 ## 📦 Release
 
