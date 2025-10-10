@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return TaskTile(
             title: task.title,
             isCompleted: task.isCompleted,
-            onChanged: (newBool) {
+            onChanged: (_) {
               setState(() {
                 taskManager.toggleTask(task);
               });
