@@ -31,6 +31,7 @@ class TaskTile extends StatelessWidget {
         children: [
           Checkbox(value: isCompleted, onChanged: onChanged),
           TextButton.icon(
+            key: const Key('deleteButton'),
             onPressed: onPressed,
             label: const Icon(Icons.delete_forever, size: 24),
           ),
