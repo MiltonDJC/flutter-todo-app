@@ -39,6 +39,7 @@ lib/
 │  └─ task_manager.dart  # Task management logic
 └─ utils/
    └─ dummy_data.dart  # Initial dummy tasks
+   └─ task_in_list.dart  # Method to verify if a task exist
 ```
 
 ---
@@ -90,6 +91,40 @@ Run tests with:
 flutter test
 ```
 
+---
+
+## 🧪 Test Coverage
+
+You can generate a **test coverage report** to see which parts of the code are covered by tests.
+
+1. Run tests with coverage:
+
+```bash
+flutter test --coverage
+```
+
+2. This generates a file ```coverage/lcov.info```.
+
+3. To view a visual HTML report:
+```bash
+# Install lcov if you don't have it (Linux/macOS)
+
+sudo apt-get install lcov  # or brew install lcov
+
+# Generate HTML report
+genhtml coverage/lcov.info -o coverage/html
+```
+
+4. Open the report in your browser:
+```bash
+open coverage/html/index.html  # macOS
+xdg-open coverage/html/index.html  # Linux
+```
+
+
+
+
+----
 ## 📦 Release
 
 Download the latest release APK here: [v1.0.0 Release](https://github.com/MiltonDJC/flutter-todo-app/releases/tag/v1.0.0)
