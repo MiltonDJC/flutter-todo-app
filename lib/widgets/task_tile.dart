@@ -6,11 +6,13 @@ class TaskTile extends StatelessWidget {
     required this.title,
     required this.isCompleted,
     required this.onChanged,
+    required this.onPressed,
   });
 
   final String title;
   final bool isCompleted;
   final ValueChanged<bool?> onChanged;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +20,22 @@ class TaskTile extends StatelessWidget {
       title: Text(
         title,
         style: TextStyle(
+          fontSize: 24,
           decoration: isCompleted
               ? TextDecoration.lineThrough
               : TextDecoration.none,
         ),
       ),
-      trailing: Checkbox(value: isCompleted, onChanged: onChanged),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Checkbox(value: isCompleted, onChanged: onChanged),
+          TextButton.icon(
+            onPressed: onPressed,
+            label: const Icon(Icons.delete_forever, size: 24),
+          ),
+        ],
+      ),
     );
   }
 }
