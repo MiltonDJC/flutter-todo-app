@@ -46,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return AlertDialog(
                 title: const Text('Nueva tarea'),
                 content: TextField(
+                  key: const Key('taskTextField'),
                   autofocus: true,
                   onChanged: (value) {
                     newTaskTitle = value;
