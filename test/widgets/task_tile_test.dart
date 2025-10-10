@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_todo_app/managers/task_manager.dart';
 import 'package:flutter_todo_app/models/task.dart';
 import 'package:flutter_todo_app/widgets/task_tile.dart';
 
 void main() {
   group('TaskTile Widget', () {
     late Task task;
+    late TaskManager taskManager;
 
     setUp(() {
       task = Task('Learn Flutter Test');
+      taskManager = TaskManager();
     });
 
     testWidgets(
@@ -22,6 +25,9 @@ void main() {
                 isCompleted: task.isCompleted,
                 onChanged: (newBool) {
                   task.isCompleted = newBool!;
+                },
+                onPressed: () {
+                  taskManager.deleteTask(task.title);
                 },
               ),
             ),
@@ -49,6 +55,9 @@ void main() {
                 onChanged: (newBool) {
                   task.isCompleted = newBool!;
                 },
+                onPressed: () {
+                  taskManager.deleteTask(task.title);
+                },
               ),
             ),
           ),
@@ -64,6 +73,9 @@ void main() {
                 title: task.title,
                 isCompleted: task.isCompleted,
                 onChanged: (_) {},
+                onPressed: () {
+                  taskManager.deleteTask(task.title);
+                },
               ),
             ),
           ),
