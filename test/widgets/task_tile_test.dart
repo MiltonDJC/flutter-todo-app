@@ -37,7 +37,6 @@ void main() {
         expect(task.isCompleted, isFalse);
 
         await tester.tap(find.byType(Checkbox));
-        await tester.pump();
 
         expect(task.isCompleted, isTrue);
       },
@@ -64,7 +63,6 @@ void main() {
         );
 
         await tester.tap(find.byType(Checkbox));
-        await tester.pump();
 
         await tester.pumpWidget(
           MaterialApp(
@@ -80,7 +78,6 @@ void main() {
             ),
           ),
         );
-        await tester.pump();
 
         final textWidget = tester.widget<Text>(find.text('Learn Flutter Test'));
 
