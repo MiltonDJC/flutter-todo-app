@@ -29,6 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 taskManager.toggleTask(task);
               });
             },
+            onPressed: () {
+              setState(() {
+                taskManager.deleteTask(task.title);
+              });
+            },
           );
         },
       ),
