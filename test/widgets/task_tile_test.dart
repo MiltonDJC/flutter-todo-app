@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_todo_app/managers/task_manager.dart';
 import 'package:flutter_todo_app/models/task.dart';
+import 'package:flutter_todo_app/screens/home_screen.dart';
 import 'package:flutter_todo_app/widgets/task_tile.dart';
 
 void main() {
@@ -12,6 +13,50 @@ void main() {
     setUp(() {
       task = Task('Learn Flutter Test');
       taskManager = TaskManager();
+    });
+
+    testWidgets('Complete flow: add, complete, and delete a task', (
+      WidgetTester tester,
+    ) async {
+      /* ============ Add task flow ============ */
+      await tester.pumpWidget(
+        const MaterialApp(home: Scaffold(body: HomeScreen())),
+      );
+
+      await tester.tap(find.byType(FloatingActionButton));
+
+      await tester.pumpAndSettle();
+
+      await tester.enterText(
+        find.byKey(const Key('taskTextField')),
+        'Learn Flutter Test',
+      );
+
+      await tester.tap(find.text('Agregar'));
+
+      await tester.pumpAndSettle();
+
+      expect(find.text('Learn Flutter Test'), findsOneWidget);
+
+      /* ============ Display task on the screen flow ============ */
+
+      await tester.tap(find.byType(Checkbox));
+
+      await tester.pumpAndSettle();
+
+      expect(tester.widget<Checkbox>(find.byType(Checkbox)).value, isTrue);
+      expect(
+        tester.widget<Text>(find.text('Learn Flutter Test')).style?.decoration,
+        TextDecoration.lineThrough,
+      );
+
+      /* ============ Delete task flow ============ */
+
+      await tester.tap(find.byKey(const Key('deleteButton')));
+
+      await tester.pumpAndSettle();
+
+      expect(find.text('Learn Flutter Test'), findsNothing);
     });
 
     testWidgets(
