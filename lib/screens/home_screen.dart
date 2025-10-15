@@ -16,81 +16,83 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('ToDo App')),
-      body: ListView.builder(
-        itemCount: taskManager.tasks.length,
-        itemBuilder: (context, index) {
-          final task = taskManager.tasks[index];
-          return TaskTile(
-            title: task.title,
-            isCompleted: task.isCompleted,
-            onChanged: (_) {
-              setState(() {
-                taskManager.toggleTask(task);
-              });
-            },
-            onPressed: () {
-              setState(() {
-                taskManager.deleteTask(task.title);
-              });
-            },
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TaskDetailScreen(task: task),
-                ),
-              );
-            },
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              String newTaskTitle = '';
-              return AlertDialog(
-                title: const Text('Nueva tarea'),
-                content: TextField(
-                  key: const Key('taskTextField'),
-                  autofocus: true,
-                  onChanged: (value) {
-                    newTaskTitle =
-                        value.substring(0, 1).toUpperCase() +
-                        value.substring(1);
-                  },
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Cancelar'),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: const Text('ToDo App')),
+        body: ListView.builder(
+          itemCount: taskManager.tasks.length,
+          itemBuilder: (context, index) {
+            final task = taskManager.tasks[index];
+            return TaskTile(
+              title: task.title,
+              isCompleted: task.isCompleted,
+              onChanged: (_) {
+                setState(() {
+                  taskManager.toggleTask(task);
+                });
+              },
+              onPressed: () {
+                setState(() {
+                  taskManager.deleteTask(task.title);
+                });
+              },
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TaskDetailScreen(task: task),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      if (newTaskTitle.trim().isNotEmpty) {
-                        setState(() {
-                          taskManager.addTask(newTaskTitle);
-                        });
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: 'Escriba el nombre de la tarea',
-                        );
-                      }
-                      Navigator.pop(context);
+                );
+              },
+            );
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                String newTaskTitle = '';
+                return AlertDialog(
+                  title: const Text('Nueva tarea'),
+                  content: TextField(
+                    key: const Key('taskTextField'),
+                    autofocus: true,
+                    onChanged: (value) {
+                      newTaskTitle =
+                          value.substring(0, 1).toUpperCase() +
+                          value.substring(1);
                     },
-                    child: const Text('Agregar'),
                   ),
-                ],
-              );
-            },
-          );
-        },
-        child: const Icon(Icons.add),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Cancelar'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        if (newTaskTitle.trim().isNotEmpty) {
+                          setState(() {
+                            taskManager.addTask(newTaskTitle);
+                          });
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: 'Escriba el nombre de la tarea',
+                          );
+                        }
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Agregar'),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
