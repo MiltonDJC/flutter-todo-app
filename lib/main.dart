@@ -11,6 +11,7 @@ class ToDoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Basic ToDo App',
       theme: ThemeData(colorSchemeSeed: Colors.blue, useMaterial3: true),
       home: const HomeScreen(),
