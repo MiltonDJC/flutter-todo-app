@@ -7,12 +7,14 @@ class TaskTile extends StatelessWidget {
     required this.isCompleted,
     required this.onChanged,
     required this.onPressed,
+    required this.onTap,
   });
 
   final String title;
   final bool isCompleted;
   final ValueChanged<bool?> onChanged;
   final VoidCallback onPressed;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class TaskTile extends StatelessWidget {
           ),
         ],
       ),
+      onTap: onTap,
     );
   }
 }
