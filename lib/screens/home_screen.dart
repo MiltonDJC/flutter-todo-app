@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/managers/task_manager.dart';
+import 'package:flutter_todo_app/screens/task_detail_screen.dart';
 import 'package:flutter_todo_app/widgets/task_tile.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -34,6 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 taskManager.deleteTask(task.title);
               });
             },
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TaskDetailScreen(task: task),
+                ),
+              );
+            },
           );
         },
       ),
@@ -49,7 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   key: const Key('taskTextField'),
                   autofocus: true,
                   onChanged: (value) {
-                    newTaskTitle = value;
+                    newTaskTitle =
+                        value.substring(0, 1).toUpperCase() +
+                        value.substring(1);
                   },
                 ),
                 actions: [
@@ -67,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         });
                       } else {
                         Fluttertoast.showToast(
-                          msg: 'Write a valid task title.',
+                          msg: 'Escriba el nombre de la tarea',
                         );
                       }
                       Navigator.pop(context);
