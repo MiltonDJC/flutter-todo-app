@@ -74,6 +74,7 @@ void main() {
                 onPressed: () {
                   taskManager.deleteTask(task.title);
                 },
+                onTap: () {},
               ),
             ),
           ),
@@ -102,6 +103,7 @@ void main() {
                 onPressed: () {
                   taskManager.deleteTask(task.title);
                 },
+                onTap: () {},
               ),
             ),
           ),
@@ -119,6 +121,7 @@ void main() {
                 onPressed: () {
                   taskManager.deleteTask(task.title);
                 },
+                onTap: () {},
               ),
             ),
           ),
