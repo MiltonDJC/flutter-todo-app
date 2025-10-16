@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Seed Color for Scheme Color:
-final Color _seedColor = Colors.purple;
+final Color _seedColor = Colors.blue;
 
 final ColorScheme _lightColorScheme = ColorScheme.fromSeed(
   seedColor: _seedColor,
