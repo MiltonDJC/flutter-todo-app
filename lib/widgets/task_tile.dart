@@ -21,8 +21,7 @@ class TaskTile extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: TextStyle(
-          fontSize: 24,
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
           decoration: isCompleted
               ? TextDecoration.lineThrough
               : TextDecoration.none,
