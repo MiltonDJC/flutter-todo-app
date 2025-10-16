@@ -24,9 +24,10 @@ class _ToDoAppState extends State<ToDoApp> {
       debugShowCheckedModeBanner: false,
       title: 'Basic ToDo App',
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      home: HomeScreen(onToggleTheme: toggleTheme, onIsDarkMode: isDarkMode),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeAnimationDuration: const Duration(milliseconds: 200),
+      home: HomeScreen(onToggleTheme: toggleTheme, isDarkMode: isDarkMode),
     );
   }
 }
