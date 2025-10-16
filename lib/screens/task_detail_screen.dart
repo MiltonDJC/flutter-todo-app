@@ -18,9 +18,22 @@ class TaskDetailScreen extends StatelessWidget {
           title: Text(task.title),
         ),
         body: Center(
-          child: Text(
-            task.isCompleted ? 'Tarea Completada' : 'Tarea Incompleta',
-            style: Theme.of(context).textTheme.headlineLarge,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                task.isCompleted ? 'Tarea Completada' : 'Tarea Incompleta',
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              const SizedBox(height: 8),
+              Icon(
+                size: 88,
+                task.isCompleted ? Icons.check : Icons.cancel,
+                color: task.isCompleted
+                    ? Colors.green
+                    : Theme.of(context).colorScheme.error,
+              ),
+            ],
           ),
         ),
       ),
