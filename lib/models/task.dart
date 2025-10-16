@@ -4,7 +4,5 @@ class Task {
   final String title;
   bool isCompleted;
 
-  void toggleComplete() {
-    isCompleted = !isCompleted;
-  }
+  void toggleComplete() => isCompleted = !isCompleted;
 }
