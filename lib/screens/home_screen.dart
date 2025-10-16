@@ -8,11 +8,11 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
     required this.onToggleTheme,
-    required this.onIsDarkMode,
+    required this.isDarkMode,
   });
 
   final VoidCallback onToggleTheme;
-  final bool onIsDarkMode;
+  final bool isDarkMode;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -28,8 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: const Text('ToDo App'),
           actions: [
+            // Change between theme modes.
             Switch(
-              value: widget.onIsDarkMode,
+              value: widget.isDarkMode,
               onChanged: (_) {
                 widget.onToggleTheme();
               },
@@ -53,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   taskManager.deleteTask(task.title);
                 });
               },
+              // Navigate to task detail.
               onTap: () {
                 Navigator.push(
                   context,
@@ -95,12 +97,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           setState(() {
                             taskManager.addTask(capitalizedText);
                           });
+                          Navigator.pop(context);
                         } else {
                           Fluttertoast.showToast(
                             msg: 'Escriba el nombre de la tarea',
                           );
                         }
-                        Navigator.pop(context);
                       },
                       child: const Text('Agregar'),
                     ),
