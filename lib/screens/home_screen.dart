@@ -5,7 +5,14 @@ import 'package:flutter_todo_app/widgets/task_tile.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+    required this.onToggleTheme,
+    required this.onIsDarkMode,
+  });
+
+  final VoidCallback onToggleTheme;
+  final bool onIsDarkMode;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -18,7 +25,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: const Text('ToDo App')),
+        appBar: AppBar(
+          title: const Text('ToDo App'),
+          actions: [
+            Switch(
+              value: widget.onIsDarkMode,
+              onChanged: (_) {
+                widget.onToggleTheme();
+              },
+            ),
+          ],
+        ),
         body: ListView.builder(
           itemCount: taskManager.tasks.length,
           itemBuilder: (context, index) {
