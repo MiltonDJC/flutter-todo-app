@@ -8,18 +8,20 @@ class TaskDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back),
+          ),
+          title: Text(task.title),
         ),
-        title: Text(task.title),
-      ),
-      body: Center(
-        child: Text(
-          task.isCompleted ? 'Tarea Completada' : 'Tarea Incompleta',
-          style: Theme.of(context).textTheme.headlineLarge,
+        body: Center(
+          child: Text(
+            task.isCompleted ? 'Tarea Completada' : 'Tarea Incompleta',
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
         ),
       ),
     );
