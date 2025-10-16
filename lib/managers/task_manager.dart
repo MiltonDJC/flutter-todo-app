@@ -10,18 +10,14 @@ class TaskManager {
 
   void addTask(String title) {
     if (title.trim().isEmpty) return;
-    if (!taskInList(title, tasks)) {
-      _tasks.add(Task(title));
-    }
+    (!taskInList(title, tasks)) ? _tasks.add(Task(title)) : null;
   }
 
   void deleteTask(String title) {
-    if (taskInList(title, tasks)) {
-      _tasks.removeWhere((task) => task.title == title);
-    }
+    taskInList(title, tasks)
+        ? _tasks.removeWhere((task) => task.title == title)
+        : null;
   }
 
-  void toggleTask(Task task) {
-    task.toggleComplete();
-  }
+  void toggleTask(Task task) => task.toggleComplete();
 }
