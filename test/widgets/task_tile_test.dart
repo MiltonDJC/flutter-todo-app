@@ -20,7 +20,11 @@ void main() {
     ) async {
       /* ============ Add task flow ============ */
       await tester.pumpWidget(
-        const MaterialApp(home: Scaffold(body: HomeScreen())),
+        MaterialApp(
+          home: Scaffold(
+            body: HomeScreen(onToggleTheme: () {}, onIsDarkMode: false),
+          ),
+        ),
       );
 
       await tester.tap(find.byType(FloatingActionButton));
