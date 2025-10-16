@@ -76,9 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     key: const Key('taskTextField'),
                     autofocus: true,
                     onChanged: (value) {
-                      newTaskTitle =
-                          value.substring(0, 1).toUpperCase() +
-                          value.substring(1);
+                      newTaskTitle = value;
                     },
                   ),
                   actions: [
@@ -91,8 +89,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     TextButton(
                       onPressed: () {
                         if (newTaskTitle.trim().isNotEmpty) {
+                          String capitalizedText =
+                              newTaskTitle.substring(0, 1).toUpperCase() +
+                              newTaskTitle.substring(1);
                           setState(() {
-                            taskManager.addTask(newTaskTitle);
+                            taskManager.addTask(capitalizedText);
                           });
                         } else {
                           Fluttertoast.showToast(
