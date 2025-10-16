@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
 
-/// Archivo: lib/theme/theme.dart
-///
-/// Define los temas claro y oscuro de la app.
-/// Aquí centralizamos colores, tipografías y estilos globales.
+// Seed Color for Scheme Color:
+final Color _seedColor = Colors.purple;
 
 final ColorScheme _lightColorScheme = ColorScheme.fromSeed(
-  seedColor: Colors.deepPurple,
+  seedColor: _seedColor,
   brightness: Brightness.light,
 );
 
 final ColorScheme _darkColorScheme = ColorScheme.fromSeed(
-  seedColor: Colors.deepPurple,
+  seedColor: _seedColor,
   brightness: Brightness.dark,
 );
 
+// Light Theme Mode:
 final ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   colorScheme: _lightColorScheme,
 
-  // Definición de tipografía base
+  // Base Typography:
   textTheme: const TextTheme(
     headlineLarge: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
     titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
     bodyMedium: TextStyle(fontSize: 16),
   ),
 
-  // Ejemplo: personalizar AppBar
+  // Custom AppBar:
   appBarTheme: AppBarTheme(
     backgroundColor: _lightColorScheme.primaryContainer,
     foregroundColor: _lightColorScheme.onPrimaryContainer,
@@ -34,7 +33,7 @@ final ThemeData lightTheme = ThemeData(
     elevation: 0,
   ),
 
-  // Ejemplo: personalizar botones elevados
+  // Custom ElevatedButton:
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: _lightColorScheme.primary,
@@ -45,16 +44,19 @@ final ThemeData lightTheme = ThemeData(
   ),
 );
 
+// Dark Theme Mode:
 final ThemeData darkTheme = ThemeData(
   useMaterial3: true,
   colorScheme: _darkColorScheme,
 
+  // Base Typography:
   textTheme: const TextTheme(
     headlineLarge: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
     titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
     bodyMedium: TextStyle(fontSize: 16),
   ),
 
+  // Custom AppBar:
   appBarTheme: AppBarTheme(
     backgroundColor: _darkColorScheme.surfaceContainerHighest,
     foregroundColor: _darkColorScheme.onSurface,
@@ -62,6 +64,7 @@ final ThemeData darkTheme = ThemeData(
     elevation: 0,
   ),
 
+  // Custom ElevatedButton:
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: _darkColorScheme.primary,
