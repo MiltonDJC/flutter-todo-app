@@ -9,18 +9,18 @@ class HomeScreen extends StatefulWidget {
     super.key,
     required this.onToggleTheme,
     required this.isDarkMode,
+    required this.taskManager,
   });
 
   final VoidCallback onToggleTheme;
   final bool isDarkMode;
+  final TaskManager taskManager;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final taskManager = TaskManager();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,15 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         body: ListView.builder(
-          itemCount: taskManager.tasks.length,
+          itemCount: widget.taskManager.tasks.length,
           itemBuilder: (context, index) {
-            final task = taskManager.tasks[index];
+            final task = widget.taskManager.tasks[index];
             return TaskTile(
               title: task.title,
               isCompleted: task.isCompleted,
-              onChanged: (_) => setState(() => taskManager.toggleTask(task)),
+              onChanged: (_) =>
+                  setState(() => widget.taskManager.toggleTask(task)),
               onPressed: () =>
-                  setState(() => taskManager.deleteTask(task.title)),
+                  setState(() => widget.taskManager.deleteTask(task.title)),
               // Navigate to task detail.
               onTap: () => Navigator.push(
                 context,
@@ -78,7 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         String capitalizedText =
                             newTaskTitle.substring(0, 1).toUpperCase() +
                             newTaskTitle.substring(1);
-                        setState(() => taskManager.addTask(capitalizedText));
+                        setState(
+                          () => widget.taskManager.addTask(capitalizedText),
+                        );
                         Navigator.pop(context);
                       } else {
                         Fluttertoast.showToast(
