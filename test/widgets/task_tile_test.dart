@@ -21,8 +21,10 @@ void main() {
       /* ============ Add task flow ============ */
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: HomeScreen(onToggleTheme: () {}, onIsDarkMode: false),
+          home: HomeScreen(
+            onToggleTheme: () {},
+            isDarkMode: false,
+            taskManager: taskManager,
           ),
         ),
       );
