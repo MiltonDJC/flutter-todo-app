@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/managers/task_manager.dart';
 import 'package:flutter_todo_app/theme/theme.dart';
 import 'package:flutter_todo_app/screens/home_screen.dart';
 
@@ -18,6 +19,8 @@ class _ToDoAppState extends State<ToDoApp> {
 
   void toggleTheme() => setState(() => isDarkMode = !isDarkMode);
 
+  TaskManager taskManager = TaskManager();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +30,11 @@ class _ToDoAppState extends State<ToDoApp> {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeAnimationDuration: const Duration(milliseconds: 200),
-      home: HomeScreen(onToggleTheme: toggleTheme, isDarkMode: isDarkMode),
+      home: HomeScreen(
+        onToggleTheme: toggleTheme,
+        isDarkMode: isDarkMode,
+        taskManager: taskManager,
+      ),
     );
   }
 }
