@@ -19,6 +19,37 @@ This app demonstrates fundamental concepts such as **state management**, **custo
 
 ---
 
+## 🎬 App Showcase
+
+Below you can see the main features of the **Flutter ToDo App** in action.
+
+### 🏠 Home Screen — Add and Manage Tasks
+Add new tasks, mark them as complete or delete them.  
+<br>
+<p align="center">
+  <img src="assets/gifs/home_screen.gif" alt="Home Screen" width="300"/>
+</p>
+
+---
+
+### 🌗 Theme Toggle — Light / Dark Mode
+Switch seamlessly between light and dark themes.  
+<br>
+<p align="center">
+  <img src="assets/gifs/theme_toggle.gif" alt="Theme Toggle" width="300"/>
+</p>
+
+---
+
+### 🔍 Task Detail Screen
+View task details and status visually on a dedicated screen.  
+<br>
+<p align="center">
+  <img src="assets/gifs/task_detail.gif" alt="Task Detail Screen" width="300"/>
+</p>
+
+---
+
 ## 🛠 Tech Stack
 
 - **Flutter** (>=3.0)
