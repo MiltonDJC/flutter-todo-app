@@ -2,11 +2,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_todo_app/managers/task_manager.dart';
 
 void main() {
-  late TaskManager taskManager;
-
   group('TaskManager', () {
+    late TaskManager taskManager;
+    late bool listenerCalled;
+
     setUp(() {
       taskManager = TaskManager();
+      listenerCalled = false;
     });
 
     test(
@@ -60,12 +62,6 @@ void main() {
         expect(taskManager.tasks, isEmpty);
       },
     );
-  });
-
-  group('toggleTask', () {
-    setUp(() {
-      taskManager = TaskManager();
-    });
     test(
       'Given a manager with one incomplete task, when toggleTask() is called, then task becomes completed',
       () {
@@ -82,6 +78,19 @@ void main() {
         taskManager.tasks[0].isCompleted = true;
         taskManager.toggleTask(taskManager.tasks[0]);
         expect(taskManager.tasks[0].isCompleted, isFalse);
+      },
+    );
+
+    test(
+      'Given a TaskManager with listeners, when a task is added, then notifyListeners() should be called and listeners are notified',
+      () {
+        taskManager.addListener(() {
+          listenerCalled = true;
+        });
+
+        taskManager.addTask('Learn Provider');
+
+        expect(listenerCalled, isTrue);
       },
     );
   });
