@@ -171,6 +171,7 @@ open coverage/html/index.html  # macOS
 xdg-open coverage/html/index.html  # Linux
 ```
 
+---
 ## 🧩 Architecture Overview
 
 This app follows a **Provider-based architecture** using `ChangeNotifier` for reactive state management.  
@@ -178,7 +179,7 @@ The goal is to keep business logic separated from UI layers and allow reactive u
 
 ![Architecture](./docs/diagram.svg)
 
-----
+---
 ## 📦 Release
 This release introduces **dark/light mode**, **task detail screen**, and **capitalized task titles**.
 
