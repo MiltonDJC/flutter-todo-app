@@ -44,15 +44,6 @@ void main() {
       },
     );
     test(
-      'Given the task manager list with only one task, when wants to remove the task, then the task manager list will increase.',
-      () {
-        taskManager.addTask('Learn Dart Test');
-        final tasksLength = taskManager.tasks.length;
-        taskManager.addTask('Learn Flutter Test');
-        expect(taskManager.tasks.length, greaterThan(tasksLength));
-      },
-    );
-    test(
       'Given the task manager list with only one task, when wants to remove the task, then the task manager list will decrease.',
       () {
         taskManager.addTask('Learn Dart Test');

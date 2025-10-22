@@ -2,26 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_todo_app/managers/task_manager.dart';
 import 'package:flutter_todo_app/models/task.dart';
+import 'package:flutter_todo_app/providers/dark_mode_provider.dart';
 import 'package:flutter_todo_app/screens/home_screen.dart';
 import 'package:flutter_todo_app/screens/task_detail_screen.dart';
 import 'package:flutter_todo_app/widgets/task_tile.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   group('Task Detail Screen', () {
     late Task task;
     late Task completedTask;
     late TaskManager taskManager;
-    late HomeScreen homeScreen;
+    late DarkModeProvider darkModeProvider;
 
     setUp(() {
       task = Task('Learn Flutter');
       completedTask = Task('Learn Flutter Test', isCompleted: true);
       taskManager = TaskManager();
-      homeScreen = HomeScreen(
-        onToggleTheme: () {},
-        isDarkMode: false,
-        taskManager: taskManager,
-      );
+      darkModeProvider = DarkModeProvider();
       taskManager.addTask(task.title);
       taskManager.addTask(completedTask.title);
     });
@@ -29,7 +27,15 @@ void main() {
     testWidgets(
       "Given the user is on the Home Screen, when the user taps on a TaskTile widget, then the application navigates to the detail screen and displays the task's title.",
       (WidgetTester tester) async {
-        await tester.pumpWidget(MaterialApp(home: homeScreen));
+        await tester.pumpWidget(
+          MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) => taskManager),
+              ChangeNotifierProvider(create: (_) => darkModeProvider),
+            ],
+            child: const MaterialApp(home: HomeScreen()),
+          ),
+        );
         await tester.tap(find.byType(TaskTile).first);
         await tester.pumpAndSettle();
         expect(find.text(task.title), findsOneWidget);
@@ -39,7 +45,15 @@ void main() {
     testWidgets(
       'Given the user is on the Task Detail Screen, when the user taps on the back button (identified by the navigatorBackButton key), then the application returns to the previous screen and the HomeScreen is displayed.',
       (WidgetTester tester) async {
-        await tester.pumpWidget(MaterialApp(home: homeScreen));
+        await tester.pumpWidget(
+          MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) => taskManager),
+              ChangeNotifierProvider(create: (_) => darkModeProvider),
+            ],
+            child: const MaterialApp(home: HomeScreen()),
+          ),
+        );
         await tester.tap(find.byType(TaskTile).first);
         await tester.pumpAndSettle();
         await tester.tap(find.byIcon(Icons.arrow_back));

@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_todo_app/managers/task_manager.dart';
 import 'package:flutter_todo_app/models/task.dart';
+import 'package:flutter_todo_app/providers/dark_mode_provider.dart';
 import 'package:flutter_todo_app/screens/home_screen.dart';
 import 'package:flutter_todo_app/widgets/task_tile.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   group('TaskTile Widget', () {
     late Task task;
+    late HomeScreen homeScreen;
     late TaskManager taskManager;
+    late DarkModeProvider darkModeProvider;
 
     setUp(() {
       task = Task('Learn Flutter Test');
       taskManager = TaskManager();
+      darkModeProvider = DarkModeProvider();
+      homeScreen = const HomeScreen();
     });
 
     testWidgets('Complete flow: add, complete, and delete a task', (
@@ -20,12 +26,12 @@ void main() {
     ) async {
       /* ============ Add task flow ============ */
       await tester.pumpWidget(
-        MaterialApp(
-          home: HomeScreen(
-            onToggleTheme: () {},
-            isDarkMode: false,
-            taskManager: taskManager,
-          ),
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => taskManager),
+            ChangeNotifierProvider(create: (_) => darkModeProvider),
+          ],
+          child: MaterialApp(home: homeScreen),
         ),
       );
 
