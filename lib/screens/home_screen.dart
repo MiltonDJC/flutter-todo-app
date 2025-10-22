@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/managers/task_manager.dart';
+import 'package:flutter_todo_app/providers/dark_mode_provider.dart';
 import 'package:flutter_todo_app/screens/task_detail_screen.dart';
 import 'package:flutter_todo_app/widgets/task_tile.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({
-    super.key,
-    required this.onToggleTheme,
-    required this.isDarkMode,
-    required this.taskManager,
-  });
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
-  final VoidCallback onToggleTheme;
-  final bool isDarkMode;
-  final TaskManager taskManager;
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final darkModeProvider = context.watch<DarkModeProvider>();
+    final taskManagerProvider = context.watch<TaskManager>();
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -30,22 +21,20 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             // Change between theme modes.
             Switch(
-              value: widget.isDarkMode,
-              onChanged: (_) => widget.onToggleTheme(),
+              value: darkModeProvider.isDarkMode,
+              onChanged: (_) => context.read<DarkModeProvider>().toggleTheme(),
             ),
           ],
         ),
         body: ListView.builder(
-          itemCount: widget.taskManager.tasks.length,
+          itemCount: taskManagerProvider.tasks.length,
           itemBuilder: (context, index) {
-            final task = widget.taskManager.tasks[index];
+            final task = taskManagerProvider.tasks[index];
             return TaskTile(
               title: task.title,
               isCompleted: task.isCompleted,
-              onChanged: (_) =>
-                  setState(() => widget.taskManager.toggleTask(task)),
-              onPressed: () =>
-                  setState(() => widget.taskManager.deleteTask(task.title)),
+              onChanged: (_) => taskManagerProvider.toggleTask(task),
+              onPressed: () => taskManagerProvider.deleteTask(task.title),
               // Navigate to task detail.
               onTap: () => Navigator.push(
                 context,
@@ -79,9 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         String capitalizedText =
                             newTaskTitle.substring(0, 1).toUpperCase() +
                             newTaskTitle.substring(1);
-                        setState(
-                          () => widget.taskManager.addTask(capitalizedText),
-                        );
+                        taskManagerProvider.addTask(capitalizedText);
                         Navigator.pop(context);
                       } else {
                         Fluttertoast.showToast(
