@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final darkModeProvider = context.watch<DarkModeProvider>();
-    final taskManagerProvider = context.watch<TaskManager>();
+    final taskManager = context.watch<TaskManager>();
 
     return SafeArea(
       child: Scaffold(
@@ -27,14 +27,14 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         body: ListView.builder(
-          itemCount: taskManagerProvider.tasks.length,
+          itemCount: taskManager.tasks.length,
           itemBuilder: (context, index) {
-            final task = taskManagerProvider.tasks[index];
+            final task = taskManager.tasks[index];
             return TaskTile(
               title: task.title,
               isCompleted: task.isCompleted,
-              onChanged: (_) => taskManagerProvider.toggleTask(task),
-              onPressed: () => taskManagerProvider.deleteTask(task.title),
+              onChanged: (_) => taskManager.toggleTask(task),
+              onPressed: () => taskManager.deleteTask(task.title),
               // Navigate to task detail.
               onTap: () => Navigator.push(
                 context,
@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                         String capitalizedText =
                             newTaskTitle.substring(0, 1).toUpperCase() +
                             newTaskTitle.substring(1);
-                        taskManagerProvider.addTask(capitalizedText);
+                        taskManager.addTask(capitalizedText);
                         Navigator.pop(context);
                       } else {
                         Fluttertoast.showToast(
