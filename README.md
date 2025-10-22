@@ -75,12 +75,15 @@ lib/
 ├─ managers/
 │  └─ task_manager.dart    # Task management logic
 └─ utils/
-   ├─ dummy_data.dart      # Initial dummy tasks
    └─ task_in_list.dart    # Method to verify if a task exists
+└─ providers/
+   └─ dark_mode_provider.dart   # Dark Mode State
+
 test/
 ├─ screens/
 │  └─ task_detail_screen_test.dart
 ├─ unit/
+│  ├─ dark_mode_provider_test.dart
 │  └─ task_manager_test.dart
 └─ widgets/
    └─ task_tile_test.dart
@@ -167,6 +170,13 @@ genhtml coverage/lcov.info -o coverage/html
 open coverage/html/index.html  # macOS
 xdg-open coverage/html/index.html  # Linux
 ```
+
+## 🧩 Architecture Overview
+
+This app follows a **Provider-based architecture** using `ChangeNotifier` for reactive state management.  
+The goal is to keep business logic separated from UI layers and allow reactive updates when state changes.
+
+![Architecture](./docs/diagram.svg)
 
 ----
 ## 📦 Release
